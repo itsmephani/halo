@@ -13,9 +13,7 @@ Rails.application.routes.draw do
    
     #login
     resources :sessions, only: [:create, :destroy]
-    #provider login eg. facebook
-    post 'login/:provider', to: 'registrations#auth_user_login'
-
+    
     get 'users/me', to: 'users#me'
     put 'users', to: 'users#update'
     
