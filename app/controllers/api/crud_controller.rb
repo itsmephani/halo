@@ -1,5 +1,5 @@
 module Api	
-	class Crudontroller < ApiController
+	class CrudController < ApiController
 		class_attribute :nesting
 		if Rails.version >= '4.0'
 		  class_attribute :permitted_attrs

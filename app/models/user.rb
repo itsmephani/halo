@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :password, :length => { :minimum => 6 }, :if => :password_digest_changed?
   validates :password, :presence=>true, :if => :should_validate_password?
   validates :password_confirmation, presence: true, :if => :password_digest_changed?
-  validates :email, uniqueness: true
+  validates :email, :name, uniqueness: true
   validates :email, presence: true
   
   before_create :generate_access_token
@@ -15,7 +15,7 @@ class User < ApplicationRecord
   
   def as_json(options = nil)
     options ||= {}
-    super().merge(provider_details_and_invites_and_active_rides(options)).merge(RIDE_SHARE_CONFIG['DEFAULTS'])
+    super().merge({})
   end
 
  

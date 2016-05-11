@@ -1,13 +1,10 @@
 class ApiController < ApplicationController
-  protect_from_forgery with: :null_session
-  skip_before_filter  :verify_authenticity_token
 
   include ActionController::Cookies
   include ActionController::MimeResponds
   include ActionController::RequestForgeryProtection
-  include ActionController::RequestForgeryProtection
   include ActionController::HttpAuthentication::Token::ControllerMethods #authenticate_or_request_with_http_token
-  before_filter :authenticate
+  before_action :authenticate
   
   def current_user
     @user
