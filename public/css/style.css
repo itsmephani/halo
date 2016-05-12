@@ -1,0 +1,36 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+  overflow: hidden;
+}
+
+body {
+  background-image: url('/img/main.jpg');
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  width: calc(100% - 30px);
+  height: 30px;
+  line-height: 30px;
+  font-size: 24px;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  background-color: rgba(224, 224, 224, 0.39);
+}
+
+.main {
+  margin-top: 75px;
+  padding: 15px;
+  height: calc(100% - 75px);
+  z-index: 1;
+}
+
+p {
+  font-family: monaco;
+}
