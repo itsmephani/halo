@@ -5,6 +5,7 @@ class ApiController < ApplicationController
   include ActionController::RequestForgeryProtection
   include ActionController::HttpAuthentication::Token::ControllerMethods #authenticate_or_request_with_http_token
   before_action :authenticate
+  before_action :set_params_user_id
   
   def current_user
     @user
@@ -22,6 +23,11 @@ class ApiController < ApplicationController
 
   def render_unauthorized
     render status: 401, json: {status: "error", status_code: 401, errors: [{ code: 0, type: 'Authentication', message: 'HTTP Token: Access denied.!'}]}
+  end
+
+  def set_params_user_id
+    resource = params[:controller].classify.demodulize.downcase
+    params[resource][:user_id] = current_user.id if(params[resource].present? && current_user.present?)
   end
 
   def user_has_token?

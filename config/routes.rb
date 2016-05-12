@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'users/me', to: 'users#me'
     put 'users', to: 'users#update'
     
+    resources :posts
 
   end
 
