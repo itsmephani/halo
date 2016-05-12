@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   include Paginate
+
+  has_many :posts
   
   has_secure_password validations: false
   validates :password, confirmation: true
