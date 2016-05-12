@@ -1,13 +1,6 @@
 module Api
   class PostsController < CrudController
-
-    private
-
-    def post_params
-      params.require(:post).permit(
-        :content
-      )
-    end
+    self.permitted_attrs = [:id, :content, :user_id]
 
   end
 end
