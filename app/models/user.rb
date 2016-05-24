@@ -2,7 +2,9 @@ class User < ApplicationRecord
   include Paginate
 
   has_many :posts
-  
+  has_many :messages
+  has_many :chatrooms, through: :messages
+
   has_secure_password validations: false
   validates :password, confirmation: true
   validates :password, :length => { :minimum => 6 }, :if => :password_digest_changed?
@@ -10,17 +12,17 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, :if => :password_digest_changed?
   validates :email, :name, uniqueness: true
   validates :email, presence: true
-  
+
   before_create :generate_access_token
 
   scope :search, ->(args){ where("name ilike ? OR email ilike ? OR about_me ilike ?", "%#{args[:q]}%",  "%#{args[:q]}%", "%#{args[:q]}%") }
-  
+
   def as_json(options = nil)
     options ||= {}
     super().merge({})
   end
 
- 
+
   private
 
   def generate_access_token
