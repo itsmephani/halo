@@ -3,9 +3,12 @@ class Post < ApplicationRecord
 
   belongs_to :user
   
+  has_many :likes, as: :likeable
+
   def as_json(options = nil)
     options ||= {}
-    super().merge({user: user})
+    user_date = user.basic_info
+    super().merge({user: user_date, likes: likes})
   end
 
 end

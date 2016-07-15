@@ -22,6 +22,10 @@ class User < ApplicationRecord
     super().merge({})
   end
 
+  def basic_info
+    self.slice('id', 'name', 'email')
+  end
+
 
   private
 
