@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     #login
     resources :sessions, only: [:create, :destroy]
 
+    get 'users', to: 'users#index'
     get 'users/me', to: 'users#me'
     put 'users', to: 'users#update'
 

@@ -1,6 +1,6 @@
 module Api
   class UsersController < CrudController
-    self.permitted_attrs = ["id", "name", "email"] 
+    self.permitted_attrs = ["id", "name", "email", "avatar", "password", "password_confirmation"] 
     before_action :parse_params, only: [:create, :update]
 
     def me

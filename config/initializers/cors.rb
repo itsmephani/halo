@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:8100', 'https://halo-staging-app.herokuapp.com'
+    origins 'localhost:8100', 'localhost:4200', 'https://halo-staging-app.herokuapp.com'
 
     resource '*',
       headers: :any,

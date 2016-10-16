@@ -1,9 +1,13 @@
 class User < ApplicationRecord
   include Paginate
 
+  mount_uploader :avatar, AvatarUploader
+
   has_many :posts
   has_many :messages
   has_many :chatrooms, through: :messages
+  has_many :friendships
+  has_many :friends, :through => :friendships
 
   has_secure_password validations: false
   validates :password, confirmation: true
@@ -15,7 +19,7 @@ class User < ApplicationRecord
 
   before_create :generate_access_token
 
-  scope :search, ->(args){ where("name ilike ? OR email ilike ? OR about_me ilike ?", "%#{args[:q]}%",  "%#{args[:q]}%", "%#{args[:q]}%") }
+  scope :search, ->(args){ where("name ilike ? OR email ilike ?", "%#{args[:q]}%",  "%#{args[:q]}%") }
 
   def as_json(options = nil)
     options ||= {}
@@ -23,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def basic_info
-    self.slice('id', 'name', 'email')
+    self.slice('id', 'name', 'email', 'avatar')
   end
 
 
@@ -38,8 +42,6 @@ class User < ApplicationRecord
   def should_validate_password?
     if provider.nil? && new_record?
       true
-    else
-      throw(:abort)
     end
   end
 
