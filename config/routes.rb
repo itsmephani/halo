@@ -20,11 +20,10 @@ Rails.application.routes.draw do
     post 'friendships', to: 'friendships#create'
 
     # users
-    get 'users', to: 'users#index'
     get 'users/me', to: 'users#me'
     put 'users', to: 'users#update'
 
-    resources :posts, :likes, :comments
+    resources :posts, :likes, :comments, :users
     
 
   end

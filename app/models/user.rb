@@ -4,6 +4,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   has_many :posts
+  has_many :posted_posts, class_name: 'Post', foreign_key: 'poster_id'
   has_many :messages
   has_many :chatrooms, through: :messages
   has_many :friendships

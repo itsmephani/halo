@@ -8,7 +8,11 @@ module Api
     end
 
     def entry
-      current_user
+      if  params['action'] == 'show'
+        super 
+      else
+        current_user
+      end
     end
 
     private
