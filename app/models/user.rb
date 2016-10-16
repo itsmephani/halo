@@ -23,11 +23,20 @@ class User < ApplicationRecord
 
   def as_json(options = nil)
     options ||= {}
-    super().merge({})
+    data = {}
+    if options[:current_user_id]
+      data['is_friend'] = self.is_friend_of options[:current_user_id]
+    end
+    super().merge(data)
   end
 
   def basic_info
     self.slice('id', 'name', 'email', 'avatar')
+  end
+
+  def is_friend_of user_id
+    Friendship.exists?({user_id: "#{user_id}", friend_id: "#{self.id}"}) ||
+        Friendship.exists?({user_id: "#{self.id}", friend_id: "#{user_id}"})
   end
 
 

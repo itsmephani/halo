@@ -1,4 +1,4 @@
-class FriendShipsController < ApiController
+class Api::FriendshipsController < ApiController
 
   def create
     friendship = current_user.friendships.build(:friend_id => params[:friend_id])

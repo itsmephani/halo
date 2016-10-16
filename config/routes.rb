@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     #login
     resources :sessions, only: [:create, :destroy]
 
+    # add friend
+    post 'friendships', to: 'friendships#create'
+
+    # users
     get 'users', to: 'users#index'
     get 'users/me', to: 'users#me'
     put 'users', to: 'users#update'
