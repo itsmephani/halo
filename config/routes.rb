@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   namespace :api,  defaults: {format: :json} do
     mount ActionCable.server => '/cable'
-    resources :chatrooms, :messages
+    resources :chatrooms do
+      resources :messages
+    end 
 
     resources :registrations, only: :create
     post 'registrations/send_password_reset', to: 'registrations#send_password_reset'
@@ -23,7 +25,7 @@ Rails.application.routes.draw do
     get 'users/me', to: 'users#me'
     put 'users', to: 'users#update'
 
-    resources :posts, :likes, :comments, :users
+    resources :posts, :likes, :comments, :users, :friendships
     
 
   end
