@@ -6,18 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-users = [
-  {name: 'John', email: 'john@example.com'},
-  {name: 'Greg', email: 'greg@example.com'},
-  {name: 'Ken', email: 'ken@example.com'},
-  {name: 'Tony', email: 'tony@example.com'},
-  {name: 'Phani', email: 'phani@example.com'}
-]
+if !User.any?
+  users = [
+    {name: 'John', email: 'john@example.com'},
+    {name: 'Greg', email: 'greg@example.com'},
+    {name: 'Ken', email: 'ken@example.com'},
+    {name: 'Tony', email: 'tony@example.com'},
+    {name: 'Phani', email: 'phani@example.com'}
+  ]
 
-users.each do |user|
-  user['password'] = 'test1234'
-  user['password_confirmation'] = 'test1234'
-  User.create(user)
-  puts "create users with name: #{user[:name]}, password: #{user['password']}"
+  users.each do |user|
+    user['password'] = 'test1234'
+    user['password_confirmation'] = 'test1234'
+    User.create(user)
+    puts "create users with name: #{user[:name]}, password: #{user['password']}"
+  end
 end
 
+if !Post.any?
+  users = User.all
+  users.each do |user|
+    Post.create({content: "Post from #{user.name}", user_id: user.id})
+  end
+end
